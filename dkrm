@@ -1,3 +1,8 @@
-dkrm () {
-  docker rm -f $(docker ps -a -q)
+function dkrm () {
+  if test $(docker ps -aq | wc -l) = "0";
+  then
+    echo "No docker containers to remove"
+  else
+    docker rm -f $(docker ps -aq)
+  fi
 }
